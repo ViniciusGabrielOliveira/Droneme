@@ -1,0 +1,128 @@
+<html>
+	<head>
+		<title>Droneme</title>
+		<script src="../js/jquery.js"></script>
+		<link href="../css/bootstrap.min.css" rel=stylesheet>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta charset="utf-8">
+		<script>
+			//E esse
+			$(document).ready(function(){
+				$('#btn-search').click(function() {
+					var nome = $('#field_Buscar').val();
+
+					console.log(nome);
+					$("#dados").empty();
+					var url = "/drone/"+nome;
+					console.log(url);
+					console.log('esta chegando aqui 2');
+					$.getJSON(url, function(data) {
+						var itens = [];
+						$.each(data, function(i){
+							itens.push("<tr> <td>"+ this.numeroSerie +"</td><td>"+ this.espec.modelo + "</td><td>"+ this.espec.marca + "</td><td>"+ this.espec.cor + "</td><td>" + this.espec.peso + "</td></tr>");
+						});	
+						console.log('esta chegnado aqui 1');
+						console.log(itens);	
+						$("#dados").append(itens);
+					});
+				});
+			});
+		</script>
+	</head>
+	<style type="text/css">
+		.cabecalho{background-color: rgb(24, 165, 204); /*background-image: url("img/back1.jpg"); background-size: 100%; background-repeat: no-repeat;*/}
+		.cabecalho ul{color: white; display: flex} 
+		.cabecalho ul li{padding: 1% 2% 1% 2%; text-decoration: none; overflow: hidden; margin-top: 4%; ; cursor: pointer;}
+		.cabecalho ul li:hover {background-color: rgba(69, 111, 193, 0.5);} 
+		
+		.seacrh{align-items: center;}
+		.cabecalho img{position: absolute; top: 5%; right: 3%; width: 3%; height: 5%; cursor: pointer;}
+		a {color: white;}
+
+		.row img{width: 3%; height: 5%; cursor: pointer;}
+
+		.painel_control{display: grid; margin-top: 2%;float: left; border: solid black 1px; background-color: rgba(163, 163, 163, 0.5); border-radius: 5px;  margin-left: 3%; width: 20%; height: 75%;}
+
+		.painel_control label{color: rgb(89, 127, 242);}
+
+		.produtos{margin-left:4%; margin-top: 2%; float: left; border: solid black 1px; border-radius: 5px; width: 70%; height: 75%;}
+	</style>
+	<body>
+		<header class="cabecalho">
+			<ul>
+				<li><a href="../index.html">Home</a></li>
+				<li><a href="sobre.html">Sobre</a></li>
+				<li><a href="lista.html">Produtos</a></li>
+				<li><a href="contato.html">Contato</a></li>
+			</ul>
+			<!-- <div class="seacrh">
+			<input type="text" class="input-large" id="searc_field" placeholder="Pesquisar...">
+			 
+			<input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"> 
+			</div>
+			<img src="../img/search.png" id="btn-search"> -->
+		</header>
+
+		<div class="row">
+			<div class="col-md-4 col-lg-4"></div> <!--Essa merda serve pra alinhar, não esquecer dessa bosta -->
+			<div class="col-md-4 col-lg-4">
+				<input type="text" class="form-control" required="required" placeholder="Pesquisar" id="field_Buscar" />
+			</div>
+			<img src="../img/search.png" id="btn-search">
+			<!-- <div class="col-md-4 col-lg-4"></div> --> 
+		</div>
+		<br><br>
+		<div class="produtos">
+			<table class="table"> 
+					
+					<tbody id="dados"> 
+						
+					</tbody> 
+			</table>
+		</div>
+		<div class="painel_control">
+			<div class="form-group col-md-12">
+                <label>Modelo</label>
+                <select id="modelo" class="input-large form-control">
+                    <option></option> 
+                    <option value="Maverik">Maverik</option>
+                    <option value=" - - "> - - </option>
+                    <option value=" - - "> - - </option>
+                </select>
+            </div>
+            <div class="form-group col-md-12">
+                <label>Marca</label>
+                <select id="marca" class="input-large form-control">
+                    <option></option> 
+                    <option value="DJI">DJI</option>
+                   <!-- <option value=" - - "> - - </option>
+                    <option value=" - - "> - - </option> --> 
+                </select>
+            </div>
+            <div class="form-group col-md-12">
+                <label>Cor</label>
+                <select id="cor" class="input-large form-control">
+                    <option></option> 
+                    <option value="Branco">Branco</option>
+                    <option value="verde">verde</option>
+                </select>
+            </div>
+            <div class="form-group col-md-12">
+                <label>Peso</label>
+                <select id="peso" class="input-large form-control">
+                    <!-- <option value="" selected="selected">Escolha o Peso</option>
+                    <option value="25KG">25KG</option>
+                    <option value="35KG">35KG</option> -->
+                    <option></option> 
+                    <option value="45KG">45KG</option>
+                    <option value="55KG">55KG</option>
+                    <option value="60KG">60KG</option>
+                    <!-- <option value="120KG">120KG</option>
+                    <option value="250KG">250KG</option> -->
+                </select>
+            </div>
+            <button class="btn btn-info" id="filtro">Buscar Drone</button>
+		</div>
+		
+	</body>
+</html>
